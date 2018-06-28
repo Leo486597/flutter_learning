@@ -8,7 +8,7 @@
       "name": "Flutter",
       "type": "dart",
       "request": "launch",
-      "program": "lib/day2.dart"
+      "program": "${workspaceFolder}/lib/day4-text.dart"
     }
   ]
 }

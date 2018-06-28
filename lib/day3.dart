@@ -27,16 +27,5 @@ class _StarWarsDataState extends State<StarWarsData> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("Star Wars Json App"),
-          backgroundColor: Colors.orangeAccent,
-        ),
-        body: ListView.builder(
-            itemCount: data == null ? 0 : data.length,
-            itemBuilder: (BuildContext context, int index) {
-              return new Container();
-            }));
-  }
+  Widget build(BuildContext context) {}
 }
