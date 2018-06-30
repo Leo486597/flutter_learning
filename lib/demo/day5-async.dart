@@ -12,7 +12,7 @@ class SampleApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Sample App',
+      title: 'My App',
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -28,46 +28,41 @@ class SampleAppPage extends StatefulWidget {
   _SampleAppPageState createState() => new _SampleAppPageState();
 }
 
-Future<String> getSWData() async {
-  final url = "https://swapi.co/api/starships";
-  String data;
-
-  var res = await http
-      .get(Uri.encodeFull(url), headers: {"Accept": "application/json"});
-  var resBody = json.decode(res.body);
-  data = resBody["results"].toString();
-
-  return data;
-}
-
 class _SampleAppPageState extends State<SampleAppPage> {
-  String _exchangeCtx = 's';
+  final url = "https://swapi.co/api/starships";
   bool _loading = false;
+  String shareData = 'no data';
 
   @override
   void initState() {
     super.initState();
-    _loading = true;
-    getSWData().then((val) {
-      setState() {
-        _exchangeCtx = val;
-        _loading = false;
-      }
-    });
   }
 
   @override
   build(BuildContext context) {
     return new Scaffold(
-        appBar: new AppBar(
-          title: new Text("Sample App"),
-        ),
-        body: new Center(child: new Text(_exchangeCtx))
-        // floatingActionButton: new FloatingActionButton(
-        //   onPressed: _updateText,
-        //   tooltip: 'Update Text',
-        //   child: new Icon(Icons.update),
-        // ),
-        );
+      appBar: new AppBar(
+        title: new Text("Mt App"),
+      ),
+      body: new Center(child: new Text(shareData)),
+      // floatingActionButton: new FloatingActionButton(
+      //   onPressed: getSWData(),
+      //   tooltip: 'Update Text',
+      //   child: new Icon(Icons.update),
+      // ),
+    );
+  }
+
+  getSWData() async {
+    var res = await http
+        .get(Uri.encodeFull(url), headers: {"Accept": "application/json"});
+    var resBody = json.decode(res.body);
+    String data = resBody["results"].toString();
+
+    if (data != null) {
+      setState(() {
+        shareData = data;
+      });
+    }
   }
 }
